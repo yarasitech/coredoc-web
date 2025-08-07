@@ -83,7 +83,7 @@ export default function DashboardPage() {
     }
   };
 
-  const getStatusIcon = (status: ProcessingStatus) => {
+  const getStatusIcon = (status: ProcessingStatus['status']) => {
     switch (status) {
       case "processing":
         return <Clock className="h-5 w-5 text-yellow-500 animate-pulse" />;
