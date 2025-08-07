@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coredoc Landing Page
+
+The official landing page for Coredoc - an open-source protocol that transforms linear documents into infinite knowledge graphs.
+
+## Overview
+
+This is a Next.js 14 application built with TypeScript, Tailwind CSS, and Framer Motion. It serves as the main marketing website for the Coredoc project, showcasing its features and encouraging developer contributions.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Font**: Inter (headlines), System fonts (body)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yarasitech/coredoc-web.git
+cd coredoc-web
+
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the landing page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+coredoc-web/
+├── app/
+│   ├── layout.tsx      # Root layout with metadata
+│   ├── page.tsx        # Homepage
+│   └── globals.css     # Global styles and CSS variables
+├── components/
+│   ├── Navigation.tsx  # Sticky header navigation
+│   ├── Hero.tsx        # Hero section with CTAs
+│   ├── ProblemSolution.tsx # Problem/solution comparison
+│   ├── HowItWorks.tsx  # Interactive process flow
+│   ├── TechnicalFeatures.tsx # Developer features
+│   ├── OpenSourceCTA.tsx # Contribution call-to-action
+│   └── Footer.tsx      # Site footer
+├── lib/
+│   └── animations.ts   # Framer Motion animation variants
+└── public/
+    └── images/         # Static assets
+```
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Responsive Design**: Mobile-first approach with breakpoints for all devices
+- **Dark Mode Support**: Automatic theme switching based on system preferences
+- **Performance Optimized**: Lazy loading, image optimization, and minimal bundle size
+- **SEO Friendly**: Proper meta tags, Open Graph, and Twitter cards
+- **Accessible**: WCAG compliant with proper ARIA labels and keyboard navigation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Run development server
+npm run dev
 
-## Deploy on Vercel
+# Build for production
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run production build locally
+npm run start
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run linting
+npm run lint
+```
+
+## Deployment
+
+The site is optimized for deployment on Vercel, Netlify, or any static hosting platform.
+
+```bash
+# Build static export
+npm run build
+
+# The output will be in the `out` directory
+```
+
+## Contributing
+
+We welcome contributions! Please see the main [Coredoc repository](https://github.com/yarasitech/coredoc) for contribution guidelines.
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Links
+
+- [Main Coredoc Repository](https://github.com/yarasitech/coredoc)
+- [Documentation](https://docs.coredoc.dev)
+- [Demo](https://demo.coredoc.dev)
+- [Discord Community](https://discord.gg/coredoc)
