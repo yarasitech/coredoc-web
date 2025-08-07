@@ -1,7 +1,13 @@
 import { Suspense } from "react";
 import DocumentViewer from "@/components/document/DocumentViewer";
 
-export default function ViewerPage({ params }: { params: { id: string } }) {
+export default async function ViewerPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  const { id } = await params;
+  
   return (
     <Suspense
       fallback={
@@ -13,7 +19,7 @@ export default function ViewerPage({ params }: { params: { id: string } }) {
         </div>
       }
     >
-      <DocumentViewer documentId={params.id} />
+      <DocumentViewer documentId={id} />
     </Suspense>
   );
 }

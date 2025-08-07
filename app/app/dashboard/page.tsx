@@ -5,7 +5,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Upload, FileText, Clock, CheckCircle, XCircle, LogOut } from "lucide-react";
 import { uploadDocument, checkDocumentStatus, getDocuments } from "@/lib/api";
-import type { Document, ProcessingStatus } from "@/types/document";
+import type { ProcessingStatus } from "@/types/document";
+
+interface Document {
+  id: string;
+  name: string;
+  created_at: string;
+  status: ProcessingStatus['status'];
+}
 
 export default function DashboardPage() {
   const router = useRouter();

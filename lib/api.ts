@@ -100,3 +100,47 @@ class ApiClient {
 }
 
 export const apiClient = new ApiClient();
+
+// Export wrapper functions for compatibility with dashboard
+export async function uploadDocument(
+  file: File, 
+  onProgress?: (progress: number) => void
+): Promise<{ id: string }> {
+  const result = await apiClient.uploadDocument(file);
+  
+  // Simulate progress for UI
+  if (onProgress) {
+    onProgress(50);
+    setTimeout(() => onProgress(100), 500);
+  }
+  
+  return { id: result.document_id };
+}
+
+export async function checkDocumentStatus(
+  documentId: string
+): Promise<{ status: ProcessingStatus['status'] }> {
+  try {
+    const doc = await apiClient.getDocument(documentId);
+    // Check if doc has a status field, otherwise assume completed
+    return { status: (doc as any).status || 'completed' };
+  } catch (error) {
+    // If we can't get the document, check processing status
+    try {
+      const status = await apiClient.getProcessingStatus(documentId);
+      return { status: status.status };
+    } catch {
+      return { status: 'failed' };
+    }
+  }
+}
+
+export async function getDocuments(): Promise<any[]> {
+  const docs = await apiClient.getDocuments();
+  return docs.map(doc => ({
+    ...doc,
+    name: doc.title,
+    status: (doc as any).status || 'completed',
+    created_at: doc.created_at || new Date().toISOString()
+  }));
+}
