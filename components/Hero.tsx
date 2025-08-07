@@ -14,7 +14,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -23,7 +23,7 @@ export default function Hero() {
         >
           {/* Badge */}
           <motion.div variants={fadeUp} className="inline-block">
-            <div className="flex items-center space-x-2 px-4 py-2 bg-muted rounded-full text-sm">
+            <div className="flex items-center space-x-3 px-5 py-2.5 bg-muted rounded-full text-sm">
               <Zap className="h-4 w-4 text-accent" />
               <span className="text-muted-foreground">
                 Open Source • MIT Licensed • Community Driven
@@ -61,7 +61,7 @@ export default function Hero() {
           >
             <Link
               href="https://demo.coredoc.dev"
-              className="group flex items-center space-x-2 px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
+              className="group flex items-center space-x-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
             >
               <span className="text-lg font-medium">View Live Demo</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -70,11 +70,11 @@ export default function Hero() {
               href="https://github.com/yarasitech/coredoc"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center space-x-2 px-8 py-4 bg-background border-2 border-border rounded-lg hover:border-primary transition-all duration-200"
+              className="group flex items-center space-x-2 px-6 py-3 bg-background border-2 border-border rounded-lg hover:border-primary transition-all duration-200"
             >
               <Github className="h-5 w-5" />
               <span className="text-lg font-medium">Star on GitHub</span>
-              <span className="px-2 py-1 bg-muted text-sm rounded-md">2.3k</span>
+              <span className="ml-2 px-3 py-0.5 bg-muted text-sm rounded-md">2.3k</span>
             </Link>
           </motion.div>
 
@@ -83,22 +83,22 @@ export default function Hero() {
             variants={fadeUp}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto"
           >
-            <div className="p-6 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
-              <FileCode className="h-10 w-10 text-primary mb-4" />
+            <div className="p-5 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
+              <FileCode className="h-8 w-8 text-primary mb-3" />
               <h3 className="text-lg font-semibold mb-2">100% Content Preserved</h3>
               <p className="text-muted-foreground">
                 Every word matters. Our semantic chunking ensures no information is lost.
               </p>
             </div>
-            <div className="p-6 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
-              <Zap className="h-10 w-10 text-accent mb-4" />
+            <div className="p-5 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
+              <Zap className="h-8 w-8 text-accent mb-3" />
               <h3 className="text-lg font-semibold mb-2">Lightning Fast</h3>
               <p className="text-muted-foreground">
                 Process 100-page documents in under 30 seconds. Navigate instantly.
               </p>
             </div>
-            <div className="p-6 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
-              <Github className="h-10 w-10 text-primary mb-4" />
+            <div className="p-5 bg-background/50 backdrop-blur-sm border border-border rounded-lg">
+              <Github className="h-8 w-8 text-primary mb-3" />
               <h3 className="text-lg font-semibold mb-2">Open Source</h3>
               <p className="text-muted-foreground">
                 MIT licensed. Built by developers, for developers. Join us!

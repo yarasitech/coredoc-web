@@ -40,13 +40,13 @@ export default function Navigation() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <FileText className="h-8 w-8 text-primary" />
+              <FileText className="h-6 w-6 text-primary" />
               <span className="text-xl font-bold">Coredoc</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -65,7 +65,7 @@ export default function Navigation() {
           </div>
 
           {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-6">
             <Link
               href="https://github.com/yarasitech/coredoc"
               target="_blank"
@@ -77,7 +77,7 @@ export default function Navigation() {
             </Link>
             <Link
               href="https://demo.coredoc.dev"
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium"
             >
               Try Demo
             </Link>
@@ -112,7 +112,7 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-foreground/80 hover:text-foreground transition-colors duration-200"
+                className="block py-3 text-foreground/80 hover:text-foreground transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -128,14 +128,14 @@ export default function Navigation() {
                 href="https://github.com/yarasitech/coredoc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 py-2 text-foreground/80 hover:text-foreground transition-colors duration-200"
+                className="flex items-center space-x-2 py-3 text-foreground/80 hover:text-foreground transition-colors duration-200"
               >
                 <Github className="h-5 w-5" />
                 <span>GitHub</span>
               </Link>
               <Link
                 href="https://demo.coredoc.dev"
-                className="block w-full text-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200"
+                className="block w-full text-center px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium"
               >
                 Try Demo
               </Link>

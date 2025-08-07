@@ -42,7 +42,7 @@ const devFeatures = [
 
 export default function TechnicalFeatures() {
   return (
-    <section id="for-developers" className="py-24 bg-muted/30">
+    <section id="for-developers" className="py-20 sm:py-24 lg:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
@@ -51,7 +51,7 @@ export default function TechnicalFeatures() {
           variants={staggerContainer}
           className="text-center space-y-4 mb-16"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold">
+          <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold">
             Built for Developers
           </motion.h2>
           <motion.p
@@ -74,7 +74,7 @@ export default function TechnicalFeatures() {
           >
             <motion.h3
               variants={fadeUp}
-              className="text-2xl font-bold flex items-center space-x-2"
+              className="text-xl sm:text-2xl font-bold flex items-center space-x-2"
             >
               <Brain className="h-8 w-8 text-primary" />
               <span>For AI/LLM Developers</span>
@@ -132,7 +132,7 @@ qa_chain = RetrievalQA.from_coredoc(
           >
             <motion.h3
               variants={fadeUp}
-              className="text-2xl font-bold flex items-center space-x-2"
+              className="text-xl sm:text-2xl font-bold flex items-center space-x-2"
             >
               <Code2 className="h-8 w-8 text-accent" />
               <span>For Full-Stack Developers</span>

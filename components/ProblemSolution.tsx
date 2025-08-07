@@ -6,7 +6,7 @@ import { fadeUp, slideInFromLeft, slideInFromRight } from "@/lib/animations";
 
 export default function ProblemSolution() {
   return (
-    <section id="features" className="py-24 bg-muted/30">
+    <section id="features" className="py-20 sm:py-24 lg:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Problem */}
@@ -21,7 +21,7 @@ export default function ProblemSolution() {
               <FileX2 className="h-8 w-8 text-red-500" />
               <h2 className="text-3xl font-bold">The Problem</h2>
             </div>
-            <h3 className="text-2xl font-semibold text-muted-foreground">
+            <h3 className="text-xl sm:text-2xl font-semibold text-muted-foreground">
               Traditional documents trap knowledge in linear formats
             </h3>
             <ul className="space-y-4">
@@ -64,7 +64,7 @@ export default function ProblemSolution() {
               <CheckCircle className="h-8 w-8 text-accent" />
               <h2 className="text-3xl font-bold">The Solution</h2>
             </div>
-            <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+            <h3 className="text-xl sm:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Coredoc breaks documents into intelligent, interconnected fragments
             </h3>
             <ul className="space-y-4">

@@ -106,7 +106,7 @@ export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section id="how-it-works" className="py-24">
+    <section id="how-it-works" className="py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
@@ -115,7 +115,7 @@ export default function HowItWorks() {
           variants={staggerContainer}
           className="text-center space-y-4 mb-16"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold">
+          <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold">
             How It Works
           </motion.h2>
           <motion.p
@@ -148,7 +148,7 @@ export default function HowItWorks() {
               >
                 <div className="flex items-start space-x-4">
                   <div
-                    className={`p-3 rounded-lg transition-colors duration-300 ${
+                    className={`p-2.5 rounded-lg transition-colors duration-300 ${
                       activeStep === index
                         ? "bg-primary text-primary-foreground"
                         : "bg-muted"

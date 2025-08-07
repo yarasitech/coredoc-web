@@ -25,7 +25,7 @@ const contributionAreas = [
 
 export default function OpenSourceCTA() {
   return (
-    <section className="py-24">
+    <section className="py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
@@ -36,7 +36,7 @@ export default function OpenSourceCTA() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} className="space-y-4">
-            <h2 className="text-4xl font-bold">Join the Revolution</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold">Join the Revolution</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Coredoc is open source and community-driven. Help us build the future
               of document navigation.
@@ -110,7 +110,7 @@ npm run dev
               href="https://github.com/yarasitech/coredoc"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center space-x-2 px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
+              className="group flex items-center space-x-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
             >
               <Github className="h-5 w-5" />
               <span className="text-lg font-medium">View on GitHub</span>
@@ -119,7 +119,7 @@ npm run dev
               href="https://discord.gg/coredoc"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center space-x-2 px-8 py-4 bg-background border-2 border-border rounded-lg hover:border-primary transition-all duration-200"
+              className="group flex items-center space-x-2 px-6 py-3 bg-background border-2 border-border rounded-lg hover:border-primary transition-all duration-200"
             >
               <MessageSquare className="h-5 w-5" />
               <span className="text-lg font-medium">Join Discord</span>

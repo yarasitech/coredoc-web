@@ -50,3 +50,39 @@ body {
   background: var(--primary);
   color: var(--primary-foreground);
 }
+
+/* Typography Scale */
+h1 {
+  @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl font-bold;
+}
+
+h3 {
+  @apply text-2xl sm:text-3xl font-bold;
+}
+
+h4 {
+  @apply text-xl sm:text-2xl font-semibold;
+}
+
+/* Consistent Button Styles */
+.btn-primary {
+  @apply px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 font-medium;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-background border-2 border-border rounded-lg hover:border-primary transition-all duration-200 font-medium;
+}
+
+/* Container Utilities */
+.container-width {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Section Padding */
+.section-padding {
+  @apply py-20 sm:py-24 lg:py-32;
+}
