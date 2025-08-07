@@ -1,5 +1,11 @@
 import { Suspense } from "react";
 import DocumentViewer from "@/components/document/DocumentViewer";
+import { apiClient } from "@/lib/api";
+
+async function DocumentViewerWrapper({ documentId }: { documentId: string }) {
+  const document = await apiClient.getDocument(documentId);
+  return <DocumentViewer document={document} />;
+}
 
 export default async function ViewerPage({ 
   params 
@@ -19,7 +25,7 @@ export default async function ViewerPage({
         </div>
       }
     >
-      <DocumentViewer documentId={id} />
+      <DocumentViewerWrapper documentId={id} />
     </Suspense>
   );
 }
