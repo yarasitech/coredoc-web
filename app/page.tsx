@@ -1,9 +1,5 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import ProblemSolution from "@/components/ProblemSolution";
-import HowItWorks from "@/components/HowItWorks";
-import TechnicalFeatures from "@/components/TechnicalFeatures";
-import OpenSourceCTA from "@/components/OpenSourceCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -12,10 +8,6 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <ProblemSolution />
-        <HowItWorks />
-        <TechnicalFeatures />
-        <OpenSourceCTA />
       </main>
       <Footer />
     </>
