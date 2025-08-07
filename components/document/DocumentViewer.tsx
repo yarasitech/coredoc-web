@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Home, Menu, X } from 'lucide-react';
 import { CoredocDocument, DocumentChunk, DocumentPage, NavigationHistory, BreadcrumbItem } from '@/types/document';
+import styles from './DocumentViewer.module.css';
 
 interface DocumentViewerProps {
   document: CoredocDocument;
@@ -203,7 +204,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
         // Replace the keyword with a clickable link
         const regex = new RegExp(`\\b${escapeRegex(keyword)}\\b`, 'gi');
         content = content.replace(regex, (match) => 
-          `<span class="keyword-link" data-chunk-id="${targetId}" title="${contextHint}">${match}</span>`
+          `<span class="${styles.keywordLink}" data-chunk-id="${targetId}" title="${contextHint}">${match}</span>`
         );
       });
     }
@@ -224,7 +225,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
         if (targetChunk) {
           const regex = new RegExp(`\\b${escapeRegex(keyword)}\\b`, 'gi');
           content = content.replace(regex, 
-            `<span class="keyword-link" data-chunk-id="${targetChunk.id}" title="Click to explore ${keyword}">${keyword}</span>`
+            `<span class="${styles.keywordLink}" data-chunk-id="${targetChunk.id}" title="Click to explore ${keyword}">${keyword}</span>`
           );
         }
       });
@@ -239,7 +240,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
 
   const handleKeywordClick = (event: React.MouseEvent) => {
     const target = event.target as HTMLElement;
-    if (target.classList.contains('keyword-link')) {
+    if (target.classList.contains(styles.keywordLink)) {
       const chunkId = target.getAttribute('data-chunk-id');
       if (chunkId) {
         navigateToChunk(chunkId);
@@ -290,14 +291,13 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
         return (
           <div key={chunk.id}>
             <div
-              className={`
-                cursor-pointer p-2 rounded transition-colors
-                ${isCurrentChunk ? 'bg-blue-100 font-bold text-blue-800' : 'hover:bg-gray-100'}
-                ${level > 0 ? `ml-${level * 4}` : ''}
-              `}
+              className={`${styles.chunkItem} ${
+                isCurrentChunk ? styles.chunkItemActive : ''
+              } ${level > 0 ? styles.chunkItemNested : ''}`}
+              style={{ marginLeft: `${level * 24}px` }}
               onClick={() => navigateToChunk(chunk.id)}
             >
-              <div className="text-sm">
+              <div>
                 {chunk.title || 'Untitled'} ({linkCount} keywords)
               </div>
             </div>
@@ -308,7 +308,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
     };
 
     return (
-      <div className="space-y-1">
+      <div className={styles.hierarchy}>
         {/* Render root chunks first */}
         {rootChunks.map(chunk => {
           const linkCount = chunk.embedded_links?.length || chunk.keywords?.length || 0;
@@ -317,13 +317,12 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
           return (
             <div key={chunk.id}>
               <div
-                className={`
-                  cursor-pointer p-2 rounded transition-colors
-                  ${isCurrentChunk ? 'bg-blue-100 font-bold text-blue-800' : 'hover:bg-gray-100'}
-                `}
+                className={`${styles.chunkItem} ${
+                  isCurrentChunk ? styles.chunkItemActive : ''
+                }`}
                 onClick={() => navigateToChunk(chunk.id)}
               >
-                <div className="text-sm">
+                <div>
                   {chunk.title || 'Untitled'} ({linkCount} keywords)
                 </div>
               </div>
@@ -337,31 +336,31 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
 
   if (!currentChunk) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-gray-500">Loading document...</div>
+      <div className={styles.loading}>
+        <div className={styles.loadingText}>Loading document...</div>
       </div>
     );
   }
 
   return (
-    <div className={`flex h-full ${className}`}>
+    <div className={`${styles.container} ${className}`}>
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'w-80' : 'w-0'} transition-all duration-300 overflow-hidden border-r border-gray-200 bg-gray-50`}>
-        <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">Document Structure</h2>
+      <div className={`${styles.sidebar} ${!sidebarOpen ? styles.sidebarClosed : ''}`}>
+        <div className={styles.sidebarContent}>
+          <div className={styles.sidebarHeader}>
+            <h2 className={styles.sidebarTitle}>Document Structure</h2>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="p-1 hover:bg-gray-200 rounded"
+              className={styles.closeButton}
             >
-              <X className="w-4 h-4" />
+              <X />
             </button>
           </div>
           
           {/* Document Info */}
-          <div className="mb-4 p-3 bg-white rounded-lg border">
-            <h3 className="font-medium text-gray-900">{document.document.title}</h3>
-            <div className="text-sm text-gray-500 mt-1">
+          <div className={styles.documentInfo}>
+            <h3 className={styles.documentTitle}>{document.document.title}</h3>
+            <div className={styles.documentMeta}>
               {document.document.total_chunks || document.document.total_pages || chunks.length} chunks
               {document.document.coverage_percentage && (
                 <span> • {document.document.coverage_percentage.toFixed(1)}% coverage</span>
@@ -370,23 +369,21 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
           </div>
 
           {/* Hierarchy */}
-          <div className="overflow-y-auto max-h-96">
-            {renderHierarchy()}
-          </div>
+          {renderHierarchy()}
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className={styles.mainContent}>
         {/* Header */}
-        <div className="border-b border-gray-200 bg-white p-4">
-          <div className="flex items-center gap-2 mb-2 text-sm text-gray-500">
+        <div className={styles.contentHeader}>
+          <div className={styles.breadcrumbs}>
             {!sidebarOpen && (
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="p-1 hover:bg-gray-100 rounded"
+                className={styles.menuButton}
               >
-                <Menu className="w-4 h-4" />
+                <Menu />
               </button>
             )}
             
@@ -395,22 +392,22 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
               <React.Fragment key={item.id}>
                 <button
                   onClick={() => navigateToChunk(item.id)}
-                  className="hover:text-blue-600 transition-colors"
+                  className={styles.breadcrumbItem}
                 >
                   {item.title}
                 </button>
                 {index < breadcrumbs.length - 1 && (
-                  <span className="text-gray-300">›</span>
+                  <span className={styles.breadcrumbSeparator}>›</span>
                 )}
               </React.Fragment>
             ))}
           </div>
           
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-900">
+          <div className={styles.headerContent}>
+            <h1 className={styles.chunkTitle}>
               {currentChunk.title || 'Untitled'}
             </h1>
-            <div className="text-sm text-gray-500">
+            <div className={styles.chunkMeta}>
               Level {currentChunk.level || 0} • {currentChunk.character_count} chars
               {currentChunk.metadata?.reading_time_seconds && (
                 <span> • {Math.ceil(currentChunk.metadata.reading_time_seconds / 60)}min read</span>
@@ -420,90 +417,70 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({ document, className = '
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 max-w-4xl mx-auto w-full">
-          <div 
-            className="prose prose-lg max-w-none"
-            onClick={handleKeywordClick}
-            dangerouslySetInnerHTML={{ __html: renderContent(currentChunk) }}
-          />
+        <div className={styles.contentArea}>
+          <div className={styles.contentWrapper}>
+            <div 
+              className={styles.prose}
+              onClick={handleKeywordClick}
+              dangerouslySetInnerHTML={{ __html: renderContent(currentChunk) }}
+            />
+          </div>
         </div>
 
         {/* Navigation */}
-        <div className="border-t border-gray-200 bg-white p-4">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-2">
+        <div className={styles.navigationFooter}>
+          <div className={styles.navigationContent}>
+            <div className={styles.navigationButtons}>
               <button
                 onClick={navigateBack}
                 disabled={navigationHistory.length === 0}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
+                className={`${styles.navButton} ${styles.navButtonPrimary}`}
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft />
                 Back
               </button>
               
               <button
                 onClick={navigateHome}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className={`${styles.navButton} ${styles.navButtonSecondary}`}
               >
-                <Home className="w-4 h-4" />
+                <Home />
                 Home
               </button>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className={styles.navigationInfo}>
               {/* Page navigation info */}
-              <span className="text-sm text-gray-500">
+              <span className={styles.pageInfo}>
                 Page {chunks.findIndex(c => c.id === currentChunk.id) + 1} of {chunks.length}
               </span>
 
               {/* Previous/Next navigation */}
-              <div className="flex gap-2">
+              <div className={styles.pageNavigation}>
                 <button
                   onClick={() => prevChunk && navigateToChunk(prevChunk.id)}
                   disabled={!prevChunk}
-                  className="flex items-center gap-1 px-3 py-2 border border-gray-300 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className={`${styles.navButton} ${styles.navButtonSecondary}`}
                   title={prevChunk ? `Previous: ${prevChunk.title}` : 'No previous page'}
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft />
                   Previous
                 </button>
                 
                 <button
                   onClick={() => nextChunk && navigateToChunk(nextChunk.id)}
                   disabled={!nextChunk}
-                  className="flex items-center gap-1 px-3 py-2 border border-gray-300 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className={`${styles.navButton} ${styles.navButtonSecondary}`}
                   title={nextChunk ? `Next: ${nextChunk.title}` : 'No next page'}
                 >
                   Next
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight />
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .keyword-link {
-          background-color: #e8f4fd;
-          border: 1px solid #3498db;
-          padding: 2px 6px;
-          border-radius: 3px;
-          cursor: pointer;
-          transition: all 0.3s;
-          display: inline-block;
-          text-decoration: none;
-          color: #2980b9;
-          font-weight: 500;
-        }
-        
-        .keyword-link:hover {
-          background-color: #3498db;
-          color: white;
-          transform: translateY(-1px);
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-      `}</style>
     </div>
   );
 };

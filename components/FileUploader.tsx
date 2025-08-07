@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Upload, File, X } from "lucide-react";
+import styles from "./FileUploader.module.css";
 
 interface FileUploaderProps {
   onFileSelect: (file: File) => void;
@@ -78,11 +79,11 @@ export default function FileUploader({ onFileSelect, onCoredocUpload, isProcessi
   const acceptedFormats = ".txt,.pdf,.docx,.doc,.json";
 
   return (
-    <div className="w-full">
+    <div className={styles.container}>
       <div
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-          dragActive ? "border-black bg-gray-50" : "border-gray-300"
-        } ${isProcessing ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+        className={`${styles.dropZone} ${
+          dragActive ? styles.dropZoneActive : ""
+        } ${isProcessing ? styles.dropZoneDisabled : ""}`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
@@ -92,18 +93,18 @@ export default function FileUploader({ onFileSelect, onCoredocUpload, isProcessi
         <input
           ref={fileInputRef}
           type="file"
-          className="hidden"
+          className={styles.hiddenInput}
           accept={acceptedFormats}
           onChange={handleChange}
           disabled={isProcessing}
         />
 
         {selectedFile ? (
-          <div className="space-y-4">
-            <File className="w-12 h-12 mx-auto text-gray-600" />
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>
-              <p className="text-xs text-gray-500">
+          <div className={styles.content}>
+            <File className={`${styles.icon} ${styles.selectedFileIcon}`} />
+            <div className={styles.textContent}>
+              <p className={styles.fileName}>{selectedFile.name}</p>
+              <p className={styles.fileSize}>
                 {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
               </p>
             </div>
@@ -113,21 +114,21 @@ export default function FileUploader({ onFileSelect, onCoredocUpload, isProcessi
                   e.stopPropagation();
                   clearFile();
                 }}
-                className="mx-auto flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
+                className={styles.removeButton}
               >
-                <X className="w-4 h-4" />
+                <X className={styles.removeIcon} />
                 Remove file
               </button>
             )}
           </div>
         ) : (
-          <div className="space-y-4">
-            <Upload className="w-12 h-12 mx-auto text-gray-400" />
-            <div className="space-y-2">
-              <p className="text-sm text-gray-600">
-                Drop your file here or <span className="font-medium text-black">browse</span>
+          <div className={styles.content}>
+            <Upload className={styles.icon} />
+            <div className={styles.textContent}>
+              <p className={styles.uploadText}>
+                Drop your file here or <span className={styles.browseText}>browse</span>
               </p>
-              <p className="text-xs text-gray-500">
+              <p className={styles.supportedFormats}>
                 Supports: TXT, PDF, DOCX, or JSON (Coredoc)
               </p>
             </div>
@@ -138,7 +139,7 @@ export default function FileUploader({ onFileSelect, onCoredocUpload, isProcessi
       {selectedFile && !isProcessing && (
         <button
           onClick={() => onFileSelect(selectedFile)}
-          className="mt-4 w-full py-3 px-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+          className={styles.processButton}
         >
           Process Document
         </button>

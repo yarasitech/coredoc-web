@@ -1,0 +1,305 @@
+/* Page Container */
+.pageContainer {
+  min-height: 100vh;
+  background-color: var(--color-gray-50);
+}
+
+/* Viewer Mode */
+.viewerContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewerHeader {
+  border-bottom: 1px solid var(--color-gray-200);
+  background-color: var(--color-secondary);
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.viewerHeaderContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backButton {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  transition: color var(--transition-fast);
+  padding: var(--spacing-sm) 0;
+}
+
+.backButton:hover {
+  color: var(--color-gray-800);
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.downloadButton:hover {
+  background-color: var(--color-gray-800);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.downloadButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.viewerContent {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  background-color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.headerContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.headerTitle {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerSubtitle {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-lg);
+}
+
+/* Main Content */
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.section {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-sm);
+}
+
+.sectionSubtitle {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+}
+
+/* Tab Navigation */
+.tabContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.tabGroup {
+  display: inline-flex;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-200);
+  background-color: var(--color-secondary);
+  padding: var(--spacing-xs);
+  box-shadow: var(--shadow-sm);
+}
+
+.tabButton {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.tabButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tabButtonActive {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.tabButtonInactive {
+  color: var(--color-gray-600);
+}
+
+.tabButtonInactive:hover {
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-50);
+}
+
+/* Tab Content */
+.tabContent {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+/* Error Message */
+.errorMessage {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  animation: fadeIn var(--transition-base);
+}
+
+/* Instructions Section */
+.instructionsCard {
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.instructionsTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+}
+
+.instructionsContent {
+  color: var(--color-gray-600);
+}
+
+.instructionsSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.instructionsSection:last-child {
+  margin-bottom: 0;
+}
+
+.instructionsSectionTitle {
+  font-weight: 600;
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-sm);
+}
+
+.instructionsList {
+  list-style: none;
+  padding-left: var(--spacing-xl);
+}
+
+.instructionsList li {
+  position: relative;
+  margin-bottom: var(--spacing-sm);
+}
+
+.instructionsList li:last-child {
+  margin-bottom: 0;
+}
+
+.orderedList {
+  counter-reset: item;
+}
+
+.orderedList li::before {
+  counter-increment: item;
+  content: counter(item) ".";
+  position: absolute;
+  left: calc(-1 * var(--spacing-xl));
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
+.unorderedList li::before {
+  content: "•";
+  position: absolute;
+  left: calc(-1 * var(--spacing-lg));
+  color: var(--color-gray-400);
+}
+
+.codeSnippet {
+  background-color: var(--color-gray-100);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-700);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headerContent {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .headerTitle {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .main {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+  
+  .section {
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .tabButton {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+  
+  .instructionsCard {
+    padding: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .tabButton {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .tabButton svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .downloadButton {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
