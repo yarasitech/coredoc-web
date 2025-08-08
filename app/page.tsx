@@ -1,4 +1,5 @@
 import FeatureCarousel from "@/components/FeatureCarousel";
+import GetStarted from "@/components/GetStarted";
 import { Github } from "lucide-react";
 import styles from "./page.module.css";
 
@@ -39,6 +40,7 @@ export default function Home() {
         
         <section className={styles.showcase}>
           <FeatureCarousel />
+          <GetStarted />
         </section>
       </main>
     </div>
