@@ -1,6 +1,7 @@
 import FeatureCarousel from "@/components/FeatureCarousel";
 import GetStarted from "@/components/GetStarted";
 import { Github } from "lucide-react";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -40,7 +41,12 @@ export default function Home() {
         
         <section className={styles.showcase}>
           <FeatureCarousel />
-          <GetStarted />
+          <div className={styles.ctaButtons}>
+            <Link href="/demo" className={styles.demoButton}>
+              Try Live Demo
+            </Link>
+            <GetStarted />
+          </div>
         </section>
       </main>
     </div>

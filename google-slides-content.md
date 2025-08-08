@@ -21,7 +21,7 @@ github.com/yarasitech/coredoc-web | discord.gg/msVnYXRWAQ | coredoc.live
 • Lost in endless scrolling
 • No connection between topics
 • Context gets lost
-• LLMs can't navigate effectively
+• LLMs can't navigate effectively and get limited by their context window
 
 **Right Column - Visual:**
 [Image of a long document with a tiny scrollbar showing user is only 10% through]

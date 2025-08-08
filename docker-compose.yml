@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  coredoc-processor:
+    build: ./standalone-processor
+    container_name: coredoc
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./standalone-processor/documents:/app/documents
+      - ./standalone-processor/examples:/app/documents/examples:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
