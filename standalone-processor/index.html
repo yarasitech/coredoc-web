@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COREDOC Viewer</title>
+    <style>
+        :root {
+            --color-primary: #000;
+            --color-secondary: #fff;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--color-gray-50);
+            color: var(--color-gray-700);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .tagline {
+            color: var(--color-gray-500);
+            font-size: 18px;
+        }
+
+        /* File Picker */
+        .file-picker {
+            background: var(--color-secondary);
+            border: 2px dashed var(--color-gray-300);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-2xl);
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            transition: all 0.3s ease;
+        }
+
+        .file-picker:hover {
+            border-color: var(--color-primary);
+        }
+
+        .file-picker.drag-over {
+            background: var(--color-gray-100);
+            border-color: var(--color-primary);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .file-label:hover {
+            opacity: 0.8;
+        }
+
+        .file-info {
+            margin-top: var(--spacing-md);
+            color: var(--color-gray-500);
+        }
+
+        /* Document List */
+        .document-list {
+            background: var(--color-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .document-item {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--color-gray-200);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .document-item:last-child {
+            border-bottom: none;
+        }
+
+        .document-item:hover {
+            background: var(--color-gray-50);
+        }
+
+        .document-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .document-meta {
+            font-size: 14px;
+            color: var(--color-gray-500);
+        }
+
+        /* Document Viewer */
+        .viewer {
+            display: none;
+            background: var(--color-secondary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .viewer.active {
+            display: block;
+        }
+
+        .viewer-header {
+            background: var(--color-gray-50);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumbs {
+            font-size: 14px;
+            color: var(--color-gray-500);
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-gray-500);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            transition: background 0.2s ease;
+        }
+
+        .close-button:hover {
+            background: var(--color-gray-200);
+        }
+
+        .viewer-content {
+            padding: var(--spacing-xl);
+        }
+
+        .chunk-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .chunk-summary {
+            font-style: italic;
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-md);
+        }
+
+        .chunk-content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .keyword {
+            background: #e8f4fd;
+            border: 1px solid #3498db;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #2980b9;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .keyword:hover {
+            background: #d0e9f9;
+        }
+
+        .chunk-metadata {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            font-size: 14px;
+            color: var(--color-gray-500);
+        }
+
+        .links-section {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .links-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .link-item {
+            display: inline-block;
+            margin: var(--spacing-xs);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .link-item:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .viewer-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-lg);
+            background: var(--color-gray-50);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .nav-button {
+            background: none;
+            border: 1px solid var(--color-gray-300);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Tree View */
+        .tree-view {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 300px;
+            background: var(--color-secondary);
+            border-right: 1px solid var(--color-gray-200);
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .tree-view.active {
+            transform: translateX(0);
+        }
+
+        .tree-toggle {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.2s ease;
+        }
+
+        .tree-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .tree-node {
+            margin: var(--spacing-xs) 0;
+        }
+
+        .tree-node-content {
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s ease;
+        }
+
+        .tree-node-content:hover {
+            background: var(--color-gray-100);
+        }
+
+        .tree-node-content.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .tree-children {
+            margin-left: var(--spacing-lg);
+            border-left: 1px solid var(--color-gray-200);
+            padding-left: var(--spacing-md);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-md);
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .chunk-title {
+                font-size: 24px;
+            }
+
+            .viewer-content {
+                padding: var(--spacing-md);
+            }
+
+            .tree-view {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">COREDOC</h1>
+            <p class="tagline">Local Document Viewer</p>
+        </header>
+
+        <div class="file-picker" id="filePicker">
+            <input type="file" id="fileInput" class="file-input" accept=".json" multiple>
+            <label for="fileInput" class="file-label">Choose COREDOC Files</label>
+            <div class="file-info">or drag and drop .json files here</div>
+        </div>
+
+        <div class="document-list" id="documentList" style="display: none;">
+            <h2 style="margin-bottom: var(--spacing-md);">Available Documents</h2>
+            <div id="documentItems"></div>
+        </div>
+
+        <div class="viewer" id="viewer">
+            <div class="viewer-header">
+                <div class="breadcrumbs" id="breadcrumbs">Document</div>
+                <button class="close-button" id="closeButton">×</button>
+            </div>
+            <div class="viewer-content" id="viewerContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="viewer-nav">
+                <button class="nav-button" id="prevButton">← Previous</button>
+                <button class="nav-button" id="homeButton">Home</button>
+                <button class="nav-button" id="nextButton">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tree-view" id="treeView">
+        <h3 style="margin-bottom: var(--spacing-md);">Document Structure</h3>
+        <div id="treeContent"></div>
+    </div>
+
+    <button class="tree-toggle" id="treeToggle">☰</button>
+
+    <script>
+        class CoredocViewer {
+            constructor() {
+                this.documents = new Map();
+                this.currentDoc = null;
+                this.currentChunkId = null;
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const fileInput = document.getElementById('fileInput');
+                const filePicker = document.getElementById('filePicker');
+                const closeButton = document.getElementById('closeButton');
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+                const homeButton = document.getElementById('homeButton');
+                const treeToggle = document.getElementById('treeToggle');
+
+                fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+                
+                // Drag and drop
+                filePicker.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    filePicker.classList.add('drag-over');
+                });
+
+                filePicker.addEventListener('dragleave', () => {
+                    filePicker.classList.remove('drag-over');
+                });
+
+                filePicker.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    filePicker.classList.remove('drag-over');
+                    this.handleFileSelect({ target: { files: e.dataTransfer.files } });
+                });
+
+                closeButton.addEventListener('click', () => this.closeViewer());
+                prevButton.addEventListener('click', () => this.navigatePrev());
+                nextButton.addEventListener('click', () => this.navigateNext());
+                homeButton.addEventListener('click', () => this.navigateHome());
+                treeToggle.addEventListener('click', () => this.toggleTree());
+
+                // Load index.json if it exists
+                this.loadIndexFile();
+            }
+
+            async loadIndexFile() {
+                try {
+                    const response = await fetch('index.json');
+                    if (response.ok) {
+                        const index = await response.json();
+                        const documentList = document.getElementById('documentList');
+                        documentList.style.display = 'block';
+                        
+                        // Load each document
+                        for (const doc of index.documents) {
+                            try {
+                                const docResponse = await fetch(doc.filename);
+                                if (docResponse.ok) {
+                                    const docData = await docResponse.json();
+                                    this.documents.set(doc.filename, docData);
+                                }
+                            } catch (e) {
+                                console.error(`Failed to load ${doc.filename}:`, e);
+                            }
+                        }
+                        
+                        this.updateDocumentList();
+                    }
+                } catch (e) {
+                    // Index file doesn't exist, that's fine
+                }
+            }
+
+            handleFileSelect(event) {
+                const files = Array.from(event.target.files);
+                files.forEach(file => {
+                    if (file.type === 'application/json' || file.name.endsWith('.json')) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            try {
+                                const data = JSON.parse(e.target.result);
+                                this.documents.set(file.name, data);
+                                this.updateDocumentList();
+                            } catch (error) {
+                                alert(`Error parsing ${file.name}: ${error.message}`);
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+                });
+            }
+
+            updateDocumentList() {
+                const documentList = document.getElementById('documentList');
+                const documentItems = document.getElementById('documentItems');
+                
+                if (this.documents.size === 0) {
+                    documentList.style.display = 'none';
+                    return;
+                }
+
+                documentList.style.display = 'block';
+                documentItems.innerHTML = '';
+
+                this.documents.forEach((doc, filename) => {
+                    const item = document.createElement('div');
+                    item.className = 'document-item';
+                    item.innerHTML = `
+                        <div class="document-title">${doc.document.title}</div>
+                        <div class="document-meta">
+                            ${doc.document.total_chunks} chunks • 
+                            ${filename}
+                        </div>
+                    `;
+                    item.addEventListener('click', () => this.openDocument(filename));
+                    documentItems.appendChild(item);
+                });
+            }
+
+            openDocument(filename) {
+                const doc = this.documents.get(filename);
+                if (!doc) return;
+
+                this.currentDoc = doc;
+                this.currentChunkId = doc.document.root_chunk_id;
+                
+                document.getElementById('viewer').classList.add('active');
+                this.renderTree();
+                this.renderChunk(this.currentChunkId);
+            }
+
+            closeViewer() {
+                document.getElementById('viewer').classList.remove('active');
+                document.getElementById('treeView').classList.remove('active');
+                this.currentDoc = null;
+                this.currentChunkId = null;
+            }
+
+            renderChunk(chunkId) {
+                if (!this.currentDoc) return;
+
+                const chunk = this.currentDoc.chunks.find(c => c.id === chunkId);
+                if (!chunk) return;
+
+                this.currentChunkId = chunkId;
+                
+                // Update breadcrumbs
+                this.updateBreadcrumbs(chunk);
+
+                // Render content
+                const content = document.getElementById('viewerContent');
+                content.innerHTML = `
+                    <h2 class="chunk-title">${chunk.title}</h2>
+                    ${chunk.summary ? `<div class="chunk-summary">${chunk.summary}</div>` : ''}
+                    <div class="chunk-metadata">
+                        <span>Level: ${chunk.level}</span>
+                        <span>Characters: ${chunk.character_count}</span>
+                        <span>Keywords: ${chunk.keywords.length}</span>
+                    </div>
+                    <div class="chunk-content">${this.highlightKeywords(chunk)}</div>
+                    ${this.renderLinks(chunk)}
+                `;
+
+                // Update navigation buttons
+                this.updateNavButtons(chunk);
+
+                // Update tree selection
+                this.updateTreeSelection(chunkId);
+
+                // Add click handlers to keywords
+                this.addKeywordHandlers(chunk);
+            }
+
+            highlightKeywords(chunk) {
+                let content = chunk.content;
+                
+                // Highlight keywords that have links
+                chunk.embedded_links.forEach(link => {
+                    const regex = new RegExp(`\\b${this.escapeRegex(link.keyword)}\\b`, 'gi');
+                    content = content.replace(regex, match => 
+                        `<span class="keyword" data-target="${link.target_page_id}" title="${link.context_hint}">${match}</span>`
+                    );
+                });
+
+                return content;
+            }
+
+            escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            renderLinks(chunk) {
+                if (!chunk.relationships.references || chunk.relationships.references.length === 0) {
+                    return '';
+                }
+
+                const links = chunk.relationships.references
+                    .map(ref => {
+                        const targetChunk = this.currentDoc.chunks.find(c => c.id === ref);
+                        return targetChunk ? `
+                            <span class="link-item" data-target="${ref}">
+                                ${targetChunk.title}
+                            </span>
+                        ` : '';
+                    })
+                    .join('');
+
+                return `
+                    <div class="links-section">
+                        <h3 class="links-title">Related Sections</h3>
+                        ${links}
+                    </div>
+                `;
+            }
+
+            addKeywordHandlers(chunk) {
+                document.querySelectorAll('.keyword[data-target]').forEach(keyword => {
+                    keyword.addEventListener('click', () => {
+                        const targetId = keyword.getAttribute('data-target');
+                        this.renderChunk(targetId);
+                    });
+                });
+
+                document.querySelectorAll('.link-item[data-target]').forEach(link => {
+                    link.addEventListener('click', () => {
+                        const targetId = link.getAttribute('data-target');
+                        this.renderChunk(targetId);
+                    });
+                });
+            }
+
+            updateBreadcrumbs(chunk) {
+                const breadcrumbs = [];
+                let current = chunk;
+
+                while (current) {
+                    breadcrumbs.unshift(current.title);
+                    if (current.parent_page_id) {
+                        current = this.currentDoc.chunks.find(c => c.id === current.parent_page_id);
+                    } else {
+                        break;
+                    }
+                }
+
+                document.getElementById('breadcrumbs').textContent = breadcrumbs.join(' › ');
+            }
+
+            updateNavButtons(chunk) {
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+
+                prevButton.disabled = !chunk.relationships.prev;
+                nextButton.disabled = !chunk.relationships.next;
+            }
+
+            navigatePrev() {
+                const chunk = this.getCurrentChunk();
+                if (chunk && chunk.relationships.prev) {
+                    this.renderChunk(chunk.relationships.prev);
+                }
+            }
+
+            navigateNext() {
+                const chunk = this.getCurrentChunk();
+                if (chunk && chunk.relationships.next) {
+                    this.renderChunk(chunk.relationships.next);
+                }
+            }
+
+            navigateHome() {
+                if (this.currentDoc) {
+                    this.renderChunk(this.currentDoc.document.root_chunk_id);
+                }
+            }
+
+            getCurrentChunk() {
+                if (!this.currentDoc || !this.currentChunkId) return null;
+                return this.currentDoc.chunks.find(c => c.id === this.currentChunkId);
+            }
+
+            toggleTree() {
+                document.getElementById('treeView').classList.toggle('active');
+            }
+
+            renderTree() {
+                const treeContent = document.getElementById('treeContent');
+                treeContent.innerHTML = '';
+
+                const rootChunkId = this.currentDoc.document.root_chunk_id;
+                const rootChunk = this.currentDoc.chunks.find(c => c.id === rootChunkId);
+                
+                if (rootChunk) {
+                    treeContent.appendChild(this.renderTreeNode(rootChunk));
+                }
+            }
+
+            renderTreeNode(chunk) {
+                const node = document.createElement('div');
+                node.className = 'tree-node';
+
+                const content = document.createElement('div');
+                content.className = 'tree-node-content';
+                content.textContent = chunk.title;
+                content.setAttribute('data-chunk-id', chunk.id);
+                content.addEventListener('click', () => this.renderChunk(chunk.id));
+                node.appendChild(content);
+
+                if (chunk.relationships.children && chunk.relationships.children.length > 0) {
+                    const children = document.createElement('div');
+                    children.className = 'tree-children';
+                    
+                    chunk.relationships.children.forEach(childId => {
+                        const childChunk = this.currentDoc.chunks.find(c => c.id === childId);
+                        if (childChunk) {
+                            children.appendChild(this.renderTreeNode(childChunk));
+                        }
+                    });
+                    
+                    node.appendChild(children);
+                }
+
+                return node;
+            }
+
+            updateTreeSelection(chunkId) {
+                document.querySelectorAll('.tree-node-content').forEach(node => {
+                    if (node.getAttribute('data-chunk-id') === chunkId) {
+                        node.classList.add('active');
+                    } else {
+                        node.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Initialize the viewer
+        new CoredocViewer();
+    </script>
+</body>
+</html>

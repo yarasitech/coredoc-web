@@ -12,27 +12,35 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: "Hierarchical Structure",
-    description: "Transform linear documents into navigable hierarchies",
+    title: "The Linear Document Problem",
+    description: "Traditional documents trap information in endless scrolling. Finding related content means hunting through pages of text.",
     visual: (
       <div className={styles.visualDemo}>
-        <div className={styles.docTree}>
-          <div className={styles.treeNode}>
-            <span className={styles.nodeTitle}>Document Root</span>
-            <div className={styles.treeChildren}>
-              <div className={styles.treeNode}>
-                <span className={styles.nodeTitle}>Chapter 1</span>
-                <div className={styles.treeChildren}>
-                  <div className={styles.treeNode}>
-                    <span className={styles.nodeTitle}>Section 1.1</span>
-                  </div>
-                  <div className={styles.treeNode}>
-                    <span className={styles.nodeTitle}>Section 1.2</span>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.treeNode}>
-                <span className={styles.nodeTitle}>Chapter 2</span>
+        <div className={styles.problemDemo}>
+          <div className={styles.linearDoc}>
+            <div className={styles.scrollBar}>
+              <div className={styles.scrollThumb} style={{ height: "10%", top: "20%" }} />
+            </div>
+            <div className={styles.docContent}>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━</div>
+              <div className={styles.contentLine}>Looking for <span className={styles.keyword}>specific info</span>?</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━</div>
+              <div className={styles.searchIndicator}>↓ Keep scrolling... ↓</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━</div>
+              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
+            </div>
+          </div>
+          <div className={styles.vs}>VS</div>
+          <div className={styles.coredocDoc}>
+            <div className={styles.nodeConnected}>
+              <span className={styles.keyword}>specific info</span>
+              <div className={styles.instantLinks}>
+                <div>→ Related Topic A</div>
+                <div>→ Example B</div>
+                <div>→ Reference C</div>
               </div>
             </div>
           </div>
@@ -41,95 +49,171 @@ const features: Feature[] = [
     ),
   },
   {
-    title: "Smart Linking",
-    description: "Keywords automatically linked between related sections",
+    title: "Transform Documents into Knowledge Graphs",
+    description: "COREDOC breaks documents into smart chunks, automatically discovers relationships, and enables instant navigation between related concepts.",
     visual: (
       <div className={styles.visualDemo}>
-        <div className={styles.linkDemo}>
-          <div className={styles.textBlock}>
-            <p>The <span className={styles.keyword}>algorithm</span> processes documents...</p>
+        <div className={styles.transformDemo}>
+          <div className={styles.beforeDoc}>
+            <div className={styles.docIcon}>📄</div>
+            <div className={styles.docLabel}>Linear Document</div>
           </div>
-          <div className={styles.linkArrow}>→</div>
-          <div className={styles.textBlock}>
-            <p>Learn more about the <span className={styles.keyword}>algorithm</span> implementation...</p>
+          <div className={styles.transformArrow}>
+            <svg width="60" height="40" viewBox="0 0 60 40">
+              <path d="M 10 20 L 40 20" stroke="currentColor" strokeWidth="2" fill="none" />
+              <path d="M 40 20 L 35 15 M 40 20 L 35 25" stroke="currentColor" strokeWidth="2" fill="none" />
+              <circle cx="15" cy="20" r="2" fill="currentColor" />
+              <circle cx="25" cy="20" r="2" fill="currentColor" />
+              <circle cx="35" cy="20" r="2" fill="currentColor" />
+            </svg>
+          </div>
+          <div className={styles.afterGraph}>
+            <div className={styles.miniGraph}>
+              <div className={styles.miniNode} style={{ top: "20%", left: "50%" }} />
+              <div className={styles.miniNode} style={{ top: "50%", left: "20%" }} />
+              <div className={styles.miniNode} style={{ top: "50%", left: "80%" }} />
+              <div className={styles.miniNode} style={{ top: "80%", left: "35%" }} />
+              <div className={styles.miniNode} style={{ top: "80%", left: "65%" }} />
+              <svg className={styles.miniLines}>
+                <line x1="50%" y1="25%" x2="20%" y2="50%" />
+                <line x1="50%" y1="25%" x2="80%" y2="50%" />
+                <line x1="20%" y1="55%" x2="35%" y2="80%" />
+                <line x1="80%" y1="55%" x2="65%" y2="80%" />
+              </svg>
+            </div>
+            <div className={styles.docLabel}>Knowledge Graph</div>
           </div>
         </div>
       </div>
     ),
   },
   {
-    title: "Non-Linear Navigation",
-    description: "Jump between related content without scrolling",
+    title: "The COREDOC Algorithm",
+    description: "1) Extract structure 2) Create optimal chunks 3) Identify keywords 4) Build relationships 5) Generate navigable output",
     visual: (
       <div className={styles.visualDemo}>
-        <div className={styles.navDemo}>
-          <div className={styles.navPath}>
-            <div className={styles.navNode}>Introduction</div>
-            <div className={styles.navArrow}>→</div>
-            <div className={styles.navNode}>Concepts</div>
-            <div className={styles.navArrow}>↗</div>
-            <div className={styles.navNode}>Examples</div>
+        <div className={styles.algorithmFlow}>
+          <div className={styles.flowStep}>
+            <div className={styles.stepNumber}>1</div>
+            <div className={styles.stepIcon}>📋</div>
+            <div className={styles.stepLabel}>Extract Structure</div>
           </div>
-          <div className={styles.navPath}>
-            <div className={styles.navNode}>Overview</div>
-            <div className={styles.navArrow}>↘</div>
-            <div className={styles.navNode}>Details</div>
-            <div className={styles.navArrow}>→</div>
-            <div className={styles.navNode}>References</div>
+          <div className={styles.flowArrow}>→</div>
+          <div className={styles.flowStep}>
+            <div className={styles.stepNumber}>2</div>
+            <div className={styles.stepIcon}>✂️</div>
+            <div className={styles.stepLabel}>Create Chunks</div>
+          </div>
+          <div className={styles.flowArrow}>→</div>
+          <div className={styles.flowStep}>
+            <div className={styles.stepNumber}>3</div>
+            <div className={styles.stepIcon}>🔍</div>
+            <div className={styles.stepLabel}>Find Keywords</div>
+          </div>
+          <div className={styles.flowArrow}>→</div>
+          <div className={styles.flowStep}>
+            <div className={styles.stepNumber}>4</div>
+            <div className={styles.stepIcon}>🔗</div>
+            <div className={styles.stepLabel}>Build Links</div>
+          </div>
+          <div className={styles.flowArrow}>→</div>
+          <div className={styles.flowStep}>
+            <div className={styles.stepNumber}>5</div>
+            <div className={styles.stepIcon}>🚀</div>
+            <div className={styles.stepLabel}>Output JSON</div>
           </div>
         </div>
       </div>
     ),
   },
   {
-    title: "Knowledge Graph",
-    description: "Documents become interconnected knowledge networks",
+    title: "Smart Document Chunking",
+    description: "Preserves document hierarchy while creating bite-sized, interconnected pieces of 500-2000 characters.",
     visual: (
       <div className={styles.visualDemo}>
-        <div className={styles.graphDemo}>
-          <div className={styles.graphNode} style={{ top: "20%", left: "50%" }}>
-            <span>Main Topic</span>
+        <div className={styles.chunkingDemo}>
+          <div className={styles.originalDoc}>
+            <div className={styles.docSection} style={{ height: "100%" }}>
+              <div className={styles.sectionTitle}>Long Document</div>
+              <div className={styles.sectionContent}>
+                <div style={{ height: "20%", background: "var(--color-gray-100)" }} />
+                <div style={{ height: "30%", background: "var(--color-gray-200)" }} />
+                <div style={{ height: "25%", background: "var(--color-gray-100)" }} />
+                <div style={{ height: "25%", background: "var(--color-gray-200)" }} />
+              </div>
+            </div>
           </div>
-          <div className={styles.graphNode} style={{ top: "50%", left: "20%" }}>
-            <span>Concept A</span>
+          <div className={styles.chunkArrows}>
+            <div>→</div>
+            <div>→</div>
+            <div>→</div>
+            <div>→</div>
           </div>
-          <div className={styles.graphNode} style={{ top: "50%", left: "80%" }}>
-            <span>Concept B</span>
+          <div className={styles.chunkedDoc}>
+            <div className={styles.chunk}>
+              <div className={styles.chunkHeader}>Chunk 1</div>
+              <div className={styles.chunkSize}>850 chars</div>
+            </div>
+            <div className={styles.chunk}>
+              <div className={styles.chunkHeader}>Chunk 2</div>
+              <div className={styles.chunkSize}>1,200 chars</div>
+            </div>
+            <div className={styles.chunk}>
+              <div className={styles.chunkHeader}>Chunk 3</div>
+              <div className={styles.chunkSize}>950 chars</div>
+            </div>
+            <div className={styles.chunk}>
+              <div className={styles.chunkHeader}>Chunk 4</div>
+              <div className={styles.chunkSize}>1,100 chars</div>
+            </div>
           </div>
-          <div className={styles.graphNode} style={{ top: "80%", left: "35%" }}>
-            <span>Example 1</span>
-          </div>
-          <div className={styles.graphNode} style={{ top: "80%", left: "65%" }}>
-            <span>Example 2</span>
-          </div>
-          <svg className={styles.graphLines}>
-            <line x1="50%" y1="30%" x2="20%" y2="50%" />
-            <line x1="50%" y1="30%" x2="80%" y2="50%" />
-            <line x1="20%" y1="60%" x2="35%" y2="80%" />
-            <line x1="80%" y1="60%" x2="65%" y2="80%" />
-          </svg>
         </div>
       </div>
     ),
   },
   {
-    title: "Clean Interface",
-    description: "Beautiful, distraction-free reading experience",
+    title: "Intelligent Cross-References",
+    description: "Natural language processing identifies important terms and creates meaningful connections between related sections.",
     visual: (
       <div className={styles.visualDemo}>
-        <div className={styles.interfaceDemo}>
-          <div className={styles.interfaceHeader}>
-            <div className={styles.breadcrumbs}>Document › Chapter › Section</div>
+        <div className={styles.nlpDemo}>
+          <div className={styles.textAnalysis}>
+            <div className={styles.textSample}>
+              "The <span className={styles.detectedKeyword}>neural network</span> architecture 
+              uses <span className={styles.detectedKeyword}>backpropagation</span> to optimize 
+              the <span className={styles.detectedKeyword}>loss function</span>..."
+            </div>
+            <div className={styles.analysisArrow}>↓</div>
+            <div className={styles.keywordList}>
+              <div className={styles.keywordItem}>
+                <span className={styles.keywordBadge}>neural network</span>
+                <span className={styles.keywordScore}>0.92</span>
+              </div>
+              <div className={styles.keywordItem}>
+                <span className={styles.keywordBadge}>backpropagation</span>
+                <span className={styles.keywordScore}>0.87</span>
+              </div>
+              <div className={styles.keywordItem}>
+                <span className={styles.keywordBadge}>loss function</span>
+                <span className={styles.keywordScore}>0.85</span>
+              </div>
+            </div>
           </div>
-          <div className={styles.interfaceContent}>
-            <h3 className={styles.contentTitle}>Section Title</h3>
-            <p className={styles.contentText}>
-              Clean, focused content with <span className={styles.keyword}>highlighted keywords</span> for easy navigation...
-            </p>
-          </div>
-          <div className={styles.interfaceNav}>
-            <span>← Previous</span>
-            <span>Next →</span>
+          <div className={styles.connectionVisual}>
+            <div className={styles.connectedChunk} style={{ top: "10%", left: "20%" }}>
+              <div className={styles.chunkMini}>Chunk A</div>
+            </div>
+            <div className={styles.connectedChunk} style={{ top: "10%", left: "80%" }}>
+              <div className={styles.chunkMini}>Chunk B</div>
+            </div>
+            <div className={styles.connectedChunk} style={{ top: "70%", left: "50%" }}>
+              <div className={styles.chunkMini}>Chunk C</div>
+            </div>
+            <svg className={styles.connectionLines}>
+              <line x1="30%" y1="20%" x2="70%" y2="20%" strokeDasharray="4 2" />
+              <line x1="25%" y1="25%" x2="45%" y2="65%" strokeDasharray="4 2" />
+              <line x1="75%" y1="25%" x2="55%" y2="65%" strokeDasharray="4 2" />
+            </svg>
           </div>
         </div>
       </div>
