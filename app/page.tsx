@@ -43,7 +43,7 @@ export default function Home() {
           <FeatureCarousel />
           <div className={styles.ctaButtons}>
             <Link href="/demo" className={styles.demoButton}>
-              Try Live Demo
+              Demo
             </Link>
             <GetStarted />
           </div>
