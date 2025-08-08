@@ -1,0 +1,352 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) 0;
+}
+
+.carouselContent {
+  position: relative;
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.slideContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+  padding: var(--spacing-3xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.slideActive {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.featureTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.featureDescription {
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-2xl);
+  max-width: 600px;
+}
+
+.featureVisual {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Navigation Buttons */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  border: 2px solid var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 2;
+}
+
+.navButton:hover {
+  background: var(--color-gray-50);
+  border-color: var(--color-gray-300);
+}
+
+.navButton svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-gray-600);
+}
+
+.navButtonPrev {
+  left: var(--spacing-xl);
+}
+
+.navButtonNext {
+  right: var(--spacing-xl);
+}
+
+/* Indicators */
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xl);
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-gray-300);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.indicator:hover {
+  background: var(--color-gray-400);
+}
+
+.indicatorActive {
+  background: var(--color-primary);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Visual Demos */
+.visualDemo {
+  padding: var(--spacing-2xl);
+  background: var(--color-gray-50);
+  border-radius: var(--radius-md);
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Document Tree */
+.docTree {
+  text-align: left;
+}
+
+.treeNode {
+  margin: var(--spacing-sm) 0;
+}
+
+.nodeTitle {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.treeChildren {
+  margin-left: var(--spacing-xl);
+  padding-left: var(--spacing-lg);
+  border-left: 2px solid var(--color-gray-300);
+}
+
+/* Link Demo */
+.linkDemo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+.textBlock {
+  padding: var(--spacing-lg);
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  flex: 1;
+}
+
+.textBlock p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+
+.keyword {
+  background: #e8f4fd;
+  border: 1px solid #3498db;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #2980b9;
+  font-weight: 500;
+}
+
+.linkArrow {
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-400);
+}
+
+/* Navigation Demo */
+.navDemo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.navPath {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.navNode {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.navArrow {
+  color: var(--color-gray-400);
+}
+
+/* Graph Demo */
+.graphDemo {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.graphNode {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-secondary);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.graphLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.graphLines line {
+  stroke: var(--color-gray-300);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+
+/* Interface Demo */
+.interfaceDemo {
+  width: 100%;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.interfaceHeader {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.breadcrumbs {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+}
+
+.interfaceContent {
+  padding: var(--spacing-xl);
+  text-align: left;
+}
+
+.contentTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.contentText {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-gray-700);
+}
+
+.interfaceNav {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-gray-50);
+  border-top: 1px solid var(--color-gray-200);
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide {
+    padding: var(--spacing-xl);
+  }
+  
+  .featureTitle {
+    font-size: var(--font-size-xl);
+  }
+  
+  .featureDescription {
+    font-size: var(--font-size-base);
+  }
+  
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .navButton svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .navButtonPrev {
+    left: var(--spacing-md);
+  }
+  
+  .navButtonNext {
+    right: var(--spacing-md);
+  }
+  
+  .visualDemo {
+    padding: var(--spacing-lg);
+    min-height: 200px;
+  }
+  
+  .linkDemo {
+    flex-direction: column;
+  }
+  
+  .linkArrow {
+    transform: rotate(90deg);
+  }
+}
