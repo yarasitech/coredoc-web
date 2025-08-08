@@ -13,7 +13,7 @@ interface Feature {
 const features: Feature[] = [
   {
     title: "The Linear Document Problem",
-    description: "Traditional documents trap information in endless scrolling. Finding related content means hunting through pages of text.",
+    description: "Traditional documents force sequential reading, making it impossible to quickly find related information. Users waste hours scrolling through pages, losing context, and missing connections between concepts.",
     visual: (
       <div className={styles.visualDemo}>
         <div className={styles.problemDemo}>
@@ -22,26 +22,24 @@ const features: Feature[] = [
               <div className={styles.scrollThumb} style={{ height: "10%", top: "20%" }} />
             </div>
             <div className={styles.docContent}>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━</div>
-              <div className={styles.contentLine}>Looking for <span className={styles.keyword}>specific info</span>?</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━</div>
+              <div className={styles.problemTitle}>Problems:</div>
+              <div className={styles.problemItem}>• Can't find information quickly</div>
+              <div className={styles.problemItem}>• Lost in endless scrolling</div>
+              <div className={styles.problemItem}>• No connection between topics</div>
+              <div className={styles.problemItem}>• Context gets lost</div>
+              <div className={styles.problemItem}>• LLMs can't navigate effectively</div>
               <div className={styles.searchIndicator}>↓ Keep scrolling... ↓</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━</div>
-              <div className={styles.contentLine} style={{ opacity: 0.3 }}>━━━━━━━━━━━━━━━</div>
             </div>
           </div>
           <div className={styles.vs}>VS</div>
           <div className={styles.coredocDoc}>
             <div className={styles.nodeConnected}>
-              <span className={styles.keyword}>specific info</span>
-              <div className={styles.instantLinks}>
-                <div>→ Related Topic A</div>
-                <div>→ Example B</div>
-                <div>→ Reference C</div>
-              </div>
+              <div className={styles.solutionTitle}>COREDOC Solution:</div>
+              <div className={styles.solutionItem}>✓ Instant navigation</div>
+              <div className={styles.solutionItem}>✓ Smart connections</div>
+              <div className={styles.solutionItem}>✓ Preserved context</div>
+              <div className={styles.solutionItem}>✓ LLM-optimized API</div>
+              <div className={styles.solutionItem}>✓ Infinitely scalable</div>
             </div>
           </div>
         </div>

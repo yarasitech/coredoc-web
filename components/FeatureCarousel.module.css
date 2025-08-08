@@ -351,6 +351,27 @@
   color: var(--color-gray-600);
 }
 
+.problemTitle, .solutionTitle {
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.problemItem {
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-sm) 0;
+  color: var(--color-gray-700);
+  text-align: left;
+}
+
+.solutionItem {
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-sm) 0;
+  color: var(--color-gray-700);
+  text-align: left;
+}
+
 .searchIndicator {
   text-align: center;
   color: var(--color-primary);
@@ -373,12 +394,12 @@
 }
 
 .nodeConnected {
-  text-align: center;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   background: var(--color-secondary);
   border: 2px solid var(--color-primary);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
+  min-width: 200px;
 }
 
 .instantLinks {

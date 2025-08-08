@@ -13,28 +13,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Coredoc - Transform Documents into Knowledge Graphs",
-  description: "An open-source protocol that revolutionizes how humans and AI navigate information through context-first document architecture",
-  keywords: ["document processing", "AI", "LLM", "knowledge graph", "open source", "RAG", "context-first"],
+  title: "COREDOC - LLM-Optimized Document API Protocol",
+  description: "A protocol for converting buckets of documents of linear text into an infinitely scalable LLM optimized API",
+  keywords: ["document processing", "AI", "LLM", "knowledge graph", "open source", "RAG", "API", "protocol"],
   authors: [{ name: "Coredoc Community" }],
   openGraph: {
-    title: "Coredoc - Transform Documents into Knowledge Graphs",
-    description: "An open-source protocol that revolutionizes how humans and AI navigate information",
+    title: "COREDOC - LLM-Optimized Document API Protocol",
+    description: "A protocol for converting buckets of documents of linear text into an infinitely scalable LLM optimized API",
     type: "website",
-    url: "https://coredoc.dev",
+    url: "https://coredoc.live",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Coredoc - Context-First Document Architecture",
+        alt: "COREDOC - LLM-Optimized Document API Protocol",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Coredoc - Transform Documents into Knowledge Graphs",
-    description: "An open-source protocol that revolutionizes how humans and AI navigate information",
+    title: "COREDOC - LLM-Optimized Document API Protocol",
+    description: "A protocol for converting buckets of documents of linear text into an infinitely scalable LLM optimized API",
     images: ["/og-image.png"],
   },
 };

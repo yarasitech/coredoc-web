@@ -18,21 +18,34 @@
 
 /* Header */
 .header {
-  text-align: center;
   margin-bottom: var(--spacing-4xl);
   animation: fadeUp var(--transition-slow);
 }
 
-/* Header Top with Social Icons */
-.headerTop {
+/* Header Container */
+.headerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-md);
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-2xl);
 }
 
-/* Social Links */
+/* Header Content */
+.headerContent {
+  flex: 1;
+  text-align: left;
+}
+
+/* Social Links Container */
+.socialLinks {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+/* Social Link */
 .socialLink {
   display: flex;
   align-items: center;
@@ -122,8 +135,14 @@
     margin-bottom: var(--spacing-3xl);
   }
   
-  .headerTop {
-    gap: var(--spacing-md);
+  .headerContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .headerContent {
+    text-align: center;
   }
   
   .logo {
@@ -132,6 +151,11 @@
   
   .tagline {
     font-size: var(--font-size-base);
+  }
+  
+  .socialLinks {
+    order: -1;
+    margin-bottom: var(--spacing-md);
   }
   
   .socialLink {
@@ -146,10 +170,6 @@
 }
 
 @media (max-width: 480px) {
-  .headerTop {
-    gap: var(--spacing-sm);
-  }
-  
   .logo {
     font-size: 40px;
   }
