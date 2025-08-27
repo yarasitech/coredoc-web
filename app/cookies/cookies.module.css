@@ -1,0 +1,117 @@
+.container {
+  min-height: 100vh;
+  padding: var(--spacing-8) var(--spacing-4);
+  background: var(--background);
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-2);
+  color: var(--text-primary);
+}
+
+.lastUpdated {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-8);
+}
+
+.section {
+  margin-bottom: var(--spacing-8);
+}
+
+.section h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  margin-bottom: var(--spacing-4);
+  color: var(--text-primary);
+}
+
+.section h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-2);
+  color: var(--text-primary);
+}
+
+.section p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-4);
+}
+
+.section ul {
+  list-style: disc;
+  margin-left: var(--spacing-6);
+  color: var(--text-secondary);
+}
+
+.section li {
+  margin-bottom: var(--spacing-2);
+  line-height: 1.6;
+}
+
+.cookieType {
+  margin-bottom: var(--spacing-6);
+  padding: var(--spacing-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cookieDetails {
+  margin-top: var(--spacing-3);
+  padding: var(--spacing-3);
+  background: var(--background);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+}
+
+.cookieDetails p {
+  margin-bottom: var(--spacing-2);
+}
+
+.cookieDetails ul {
+  margin-top: var(--spacing-1);
+}
+
+.section code {
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--font-jetbrains-mono);
+  font-size: var(--font-size-sm);
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: opacity 0.2s var(--transition-ease);
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.footer {
+  margin-top: var(--spacing-16);
+  padding-top: var(--spacing-8);
+  border-top: 1px solid var(--border);
+}
+
+.backLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color 0.2s var(--transition-ease);
+}
+
+.backLink:hover {
+  color: var(--primary);
+}

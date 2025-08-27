@@ -133,6 +133,43 @@ MIT License - see [LICENSE](LICENSE) for details
 - [ ] Cloud processing option
 - [ ] Collaborative features
 
+## Privacy & Cookie Consent
+
+### Overview
+This website implements a comprehensive cookie consent management system to ensure GDPR compliance. The system is designed to meet Microsoft Clarity's requirements and must be fully compliant by October 31st, 2025.
+
+### Features
+- **Automatic EU Detection**: Detects users from EU/UK/Switzerland using timezone-based geolocation
+- **Granular Consent Management**: Users can control analytics and marketing cookies separately
+- **Microsoft Clarity Integration**: Analytics only loads after explicit user consent
+- **Privacy-First Design**: Non-EU users are auto-consented to analytics only (not marketing)
+- **Persistent Preferences**: Cookie choices are remembered for 365 days
+
+### Testing Cookie Consent
+To test the cookie consent banner as an EU user:
+```javascript
+// In browser console
+localStorage.setItem('coredoc_simulate_eu', 'true');
+// Then refresh the page
+```
+
+### Cookie Types
+- **Necessary Cookies**: Essential for website functionality (always enabled)
+  - `coredoc_cookie_consent`: Stores consent preferences
+- **Analytics Cookies**: Microsoft Clarity for session recordings and heatmaps (requires consent)
+  - Project ID: `srt9q71p7f`
+- **Marketing Cookies**: Currently not used
+
+### Privacy Pages
+- Privacy Policy: `/privacy`
+- Cookie Policy: `/cookies`
+
+### Implementation Details
+- Consent management in `/lib/consent/consent-manager.ts`
+- Cookie consent components in `/components/CookieConsent/`
+- Updated Clarity component to check consent before loading
+- CSS modules used for consistent styling
+
 ## Support
 
 For issues and questions:

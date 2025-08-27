@@ -1,0 +1,151 @@
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: var(--spacing-4);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  transform: translateY(0);
+  transition: transform 0.3s var(--transition-ease);
+}
+
+.banner.closing {
+  transform: translateY(100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: var(--spacing-2);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s var(--transition-ease);
+}
+
+.closeButton:hover {
+  background: var(--hover);
+  color: var(--text-primary);
+}
+
+.content {
+  padding-right: 48px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.iconWrapper {
+  padding: var(--spacing-2);
+  background: var(--primary-bg);
+  border-radius: var(--radius);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-4);
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: opacity 0.2s var(--transition-ease);
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.button {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s var(--transition-ease);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.buttonPrimary {
+  background: var(--primary);
+  color: white;
+}
+
+.buttonPrimary:hover {
+  opacity: 0.9;
+}
+
+.buttonSecondary {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.buttonSecondary:hover {
+  background: var(--hover);
+}
+
+.buttonOutline {
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.buttonOutline:hover {
+  background: var(--hover);
+  color: var(--text-primary);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .banner {
+    padding: var(--spacing-3);
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
